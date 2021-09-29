@@ -1,0 +1,125 @@
+
+import 'package:cosmetic_ui_app/ui/sceeen/main_screen.dart';
+import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
+import 'package:flutter/material.dart';
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _buttonController;
+
+  late Animation _buttonAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _buttonController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _buttonAnimation = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(curve: Curves.fastOutSlowIn, parent: _buttonController),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.cyanAccent,
+      body: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          width: double.infinity,
+          height: 320,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(30),
+            ),
+            color: Colors.white,
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                    'Meet new era of',
+                    style: TextStyle(
+                      color: Colors.pinkAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextWidget(text: 'Natural', size: 60),
+                        CustomTextWidget(text: 'Beauty', size: 60),
+                      ],
+                    ),
+                    Spacer(),
+                    AnimatedBuilder(
+                      builder: (context, child) {
+                        if (_buttonAnimation.isCompleted) {
+                          _buttonController.reverse().then(
+                                (value) => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MainPage(),
+                                  ),
+                                ),
+                              );
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            _buttonController.forward();
+                          },
+                          child: Transform.rotate(
+                            angle: _buttonAnimation.value,
+                            child: Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                boxShadow: _buttonController.isAnimating
+                                    ? [
+                                        BoxShadow(
+                                          color: Colors.cyanAccent,
+                                          spreadRadius: 5.0,
+                                        ),
+                                      ]
+                                    : null,
+                                color: _buttonController.isAnimating
+                                    ? Colors.pinkAccent
+                                    : Colors.cyanAccent,
+                                borderRadius: BorderRadius.circular(80),
+                              ),
+                              child: Icon(
+                                Icons.arrow_forward,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      animation: _buttonAnimation,
+                    )
+                  ],
+                ),
+                CustomTextWidget(text: 'Cosmetics', size: 60),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
