@@ -1,4 +1,3 @@
-
 import 'package:cosmetic_ui_app/ui/sceeen/main_screen.dart';
 import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +32,8 @@ class _SplashScreenState extends State<SplashScreen>
       body: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          width: double.infinity,
-          height: 320,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 2.1,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(30),

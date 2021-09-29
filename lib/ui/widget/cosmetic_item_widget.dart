@@ -11,6 +11,9 @@ class _CosmeticItemState extends State<CosmeticItem>
   late AnimationController _animationController;
   late Animation _animation;
 
+  String imageUrl =
+      'https://cdn.shopify.com/s/files/1/1546/0661/products/Perfect-Setting-Powder_1_2000x600.png?v=1513718610';
+
   @override
   void initState() {
     _animationController = AnimationController(
@@ -111,7 +114,7 @@ class _CosmeticItemState extends State<CosmeticItem>
           left: 20,
           child: Container(
             child: Image.network(
-              'https://cdn.shopify.com/s/files/1/1546/0661/products/Perfect-Setting-Powder_1_2000x600.png?v=1513718610',
+              imageUrl,
               height: 130,
               width: 130,
             ),

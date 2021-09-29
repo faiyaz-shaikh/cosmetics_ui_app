@@ -9,6 +9,9 @@ class CartItem extends StatefulWidget {
 class _CartItemState extends State<CartItem> {
   int _counter = 1;
 
+  String imageUrl =
+      'https://cdn.shopify.com/s/files/1/1546/0661/products/Perfect-Setting-Powder_1_2000x600.png?v=1513718610';
+
   void _increment() {
     _counter++;
     setState(() {});
@@ -32,8 +35,7 @@ class _CartItemState extends State<CartItem> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.black12),
-              child: Image.network(
-                  'https://cdn.shopify.com/s/files/1/1546/0661/products/Perfect-Setting-Powder_1_2000x600.png?v=1513718610'),
+              child: Image.network(imageUrl),
             ),
           ),
           Expanded(
