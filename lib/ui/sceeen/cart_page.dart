@@ -33,7 +33,7 @@ class _CartPageState extends State<CartPage>
     return Container(
       alignment: Alignment.topLeft,
       height: MediaQuery.of(context).size.height / 1.15,
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: MyColor.BACKGROUND_COLOR,
         borderRadius: BorderRadius.vertical(
