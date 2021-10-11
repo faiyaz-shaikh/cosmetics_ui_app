@@ -1,3 +1,4 @@
+import 'package:cosmetic_ui_app/model/product_model.dart';
 import 'package:cosmetic_ui_app/ui/widget/cosmetic_item_widget.dart';
 import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
 import 'package:cosmetic_ui_app/ui/widget/search_bar_widget.dart';
@@ -6,11 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomePage extends StatefulWidget {
+  final List? dummyData;
+  HomePage(this.dummyData);
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(dummyData);
 }
 
 class _HomePageState extends State<HomePage> {
+  List? dummyData;
+  _HomePageState(this.dummyData);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,14 +79,23 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSpacing: 50.0,
                       physics: ScrollPhysics(),
                       children: List.generate(
-                        10,
+                        dummyData!.length,
                         (index) => AnimationConfiguration.staggeredGrid(
                           position: index,
                           duration: const Duration(milliseconds: 500),
                           columnCount: 2,
                           child: SlideAnimation(
                             child: FadeInAnimation(
-                              child: CosmeticItem(),
+                              child: Draggable<ProductModel>(
+                                data: dummyData![index],
+                                feedback: Container(
+                                  color: Colors.white60,
+                                  height: 100,
+                                  width: 100,
+                                  child: const Icon(Icons.shopping_bag),
+                                ),
+                                child: CosmeticItem(dummyData![index]),
+                              ),
                             ),
                           ),
                         ),

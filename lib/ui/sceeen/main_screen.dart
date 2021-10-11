@@ -1,7 +1,11 @@
+import 'package:cosmetic_ui_app/controller/cart_controller.dart';
+import 'package:cosmetic_ui_app/model/product_model.dart';
 import 'package:cosmetic_ui_app/ui/sceeen/cart_page.dart';
 import 'package:cosmetic_ui_app/ui/sceeen/favourite_page.dart';
 import 'package:cosmetic_ui_app/ui/sceeen/home_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -10,11 +14,22 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
-  List<Widget> tabs = [
-    HomePage(),
-    FavouritePage(),
-    CartPage(),
-  ];
+  List<Widget>? tabs;
+
+  _MainPageState() {
+    tabs = [
+      HomePage(ProductModel.dummyData),
+      FavouritePage(),
+      CartPage(),
+    ];
+  }
+
+  CartController? cartController;
+  @override
+  void initState() {
+    cartController = Get.find<CartController>();
+    super.initState();
+  }
 
   void _incrementTab(index) => setState(() => _currentIndex = index);
 
@@ -23,7 +38,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black54,
-      body: tabs[_currentIndex],
+      body: tabs![_currentIndex],
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: BottomNavigationBar(
@@ -55,7 +70,16 @@ class _MainPageState extends State<MainPage> {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
+              icon: DragTarget<ProductModel>(
+                builder: (BuildContext context, List<Object?> candidateData,
+                    List<dynamic> rejectedData) {
+                  return Icon(Icons.shopping_bag);
+                },
+                onWillAccept: (productModel) {
+                  cartController!.addItem(productModel!);
+                  return true;
+                },
+              ),
               label: '',
             ),
           ],
