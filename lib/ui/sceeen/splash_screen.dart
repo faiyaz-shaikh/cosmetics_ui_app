@@ -1,6 +1,8 @@
+import 'package:cosmetic_ui_app/controller/cart_controller.dart';
 import 'package:cosmetic_ui_app/ui/sceeen/main_screen.dart';
 import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,6 +17,9 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void initState() {
+    Get.put(
+      CartController(),
+    );
     super.initState();
     _buttonController = AnimationController(
       duration: const Duration(milliseconds: 300),

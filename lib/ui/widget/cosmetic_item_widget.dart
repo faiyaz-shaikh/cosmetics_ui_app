@@ -1,18 +1,22 @@
+import 'package:cosmetic_ui_app/model/product_model.dart';
 import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class CosmeticItem extends StatefulWidget {
+  final ProductModel productModel;
+  CosmeticItem(this.productModel);
   @override
-  _CosmeticItemState createState() => _CosmeticItemState();
+  _CosmeticItemState createState() => _CosmeticItemState(productModel);
 }
 
 class _CosmeticItemState extends State<CosmeticItem>
     with SingleTickerProviderStateMixin {
+
+  ProductModel productModel;
+  _CosmeticItemState(this.productModel);
+
   late AnimationController _animationController;
   late Animation _animation;
-
-  String imageUrl =
-      'https://cdn.shopify.com/s/files/1/1546/0661/products/Perfect-Setting-Powder_1_2000x600.png?v=1513718610';
 
   @override
   void initState() {
@@ -33,7 +37,6 @@ class _CosmeticItemState extends State<CosmeticItem>
       clipBehavior: Clip.none,
       children: [
         Container(
-          width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(
@@ -52,14 +55,14 @@ class _CosmeticItemState extends State<CosmeticItem>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomTextWidget(text: 'Powder', size: 16),
+                CustomTextWidget(text: productModel.productName, size: 16),
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
-                  child: Text('with olive oil'),
+                  child: Text(productModel.description),
                 ),
                 Row(
                   children: [
-                    CustomTextWidget(text: r'$10,57', size: 16),
+                    CustomTextWidget(text:"\$${productModel.price}", size: 16),
                     Spacer(),
                     AnimatedBuilder(
                       animation: _animation,
@@ -114,7 +117,7 @@ class _CosmeticItemState extends State<CosmeticItem>
           left: 20,
           child: Container(
             child: Image.network(
-              imageUrl,
+              productModel.imageUrl,
               height: 130,
               width: 130,
             ),
