@@ -1,5 +1,5 @@
 import 'package:cosmetic_ui_app/controller/cart_controller.dart';
-import 'package:cosmetic_ui_app/ui/sceeen/main_screen.dart';
+import 'package:cosmetic_ui_app/ui/sceeen/sign_in_screen.dart';
 import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -78,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 (value) => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MainPage(),
+                                    builder: (context) => SignIn(),
                                   ),
                                 ),
                               );
