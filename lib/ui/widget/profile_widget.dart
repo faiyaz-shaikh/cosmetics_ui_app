@@ -1,7 +1,5 @@
-import 'package:cosmetic_ui_app/controller/sign_in_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProfileWidget extends StatefulWidget {
 
@@ -16,7 +14,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
   @override

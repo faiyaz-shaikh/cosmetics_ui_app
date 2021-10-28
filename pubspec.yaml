@@ -28,6 +28,10 @@ dependencies:
   google_sign_in: ^5.1.0
   firebase_auth: ^3.1.4
   flutter_facebook_login: ^3.0.0
+  pinput: ^1.2.1
+  firebase_messaging: ^10.0.9
+  flutter_local_notifications: ^9.0.1
+  firebase_core: ^1.8.0
 
 dev_dependencies:
   flutter_test:
