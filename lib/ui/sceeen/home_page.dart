@@ -1,8 +1,10 @@
 import 'package:cosmetic_ui_app/model/product_model.dart';
 import 'package:cosmetic_ui_app/ui/widget/cosmetic_item_widget.dart';
 import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
+import 'package:cosmetic_ui_app/ui/widget/profile_widget.dart';
 import 'package:cosmetic_ui_app/ui/widget/search_bar_widget.dart';
 import 'package:cosmetic_ui_app/value/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -14,6 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final user = FirebaseAuth.instance.currentUser;
   List? dummyData;
   _HomePageState(this.dummyData);
   @override
@@ -37,29 +41,14 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   children: [
                     Text(
-                      'Hello, Julia!',
+                      'Hello, ${user!.displayName}',
                       style: TextStyle(
                         color: Colors.pinkAccent,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Spacer(),
-                    Stack(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey,
-                        ),
-                        Positioned(
-                          top: 0.0,
-                          right: 0.0,
-                          child: Icon(
-                            Icons.brightness_1,
-                            size: 10.0,
-                            color: Colors.redAccent,
-                          ),
-                        )
-                      ],
-                    )
+                    ProfileWidget(),
                   ],
                 ),
                 CustomTextWidget(text: 'Choose your', size: 35),

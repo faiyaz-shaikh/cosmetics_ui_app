@@ -1,6 +1,7 @@
 import 'package:cosmetic_ui_app/controller/cart_controller.dart';
-import 'package:cosmetic_ui_app/ui/sceeen/main_screen.dart';
+import 'package:cosmetic_ui_app/ui/sceeen/sign_in_screen.dart';
 import 'package:cosmetic_ui_app/ui/widget/custom_text_widget.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,19 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _buttonAnimation = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(curve: Curves.fastOutSlowIn, parent: _buttonController),
+    );
+
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        if (message != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SignIn(),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -78,7 +92,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 (value) => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MainPage(),
+                                    builder: (context) => SignIn(),
                                   ),
                                 ),
                               );

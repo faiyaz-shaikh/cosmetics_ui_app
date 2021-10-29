@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "366195012457",
+    "project_id": "cosmetics-app-5aaa9",
+    "storage_bucket": "cosmetics-app-5aaa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366195012457:android:dea5136078a7b6ae1903f8",
+        "android_client_info": {
+          "package_name": "com.example.cosmetic_ui_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366195012457-h9ascu2diesr5fqp65civ7249ifr1bfs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cosmetic_ui_app",
+            "certificate_hash": "60eeb3cd151752ae4e81eb9a87fbdc01431f1bb1"
+          }
+        },
+        {
+          "client_id": "366195012457-ovm39u18vcmp9vdpkg014ibpaia1gqj7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhY77NNay6upDpsrl3nkEF2Z4taAPjSQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366195012457-ovm39u18vcmp9vdpkg014ibpaia1gqj7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "366195012457-m1hqob2o1anp7ndimrm1a2b4o50g9p2c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cosmeticUiApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
