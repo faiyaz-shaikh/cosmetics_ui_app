@@ -1,3 +1,4 @@
+import 'package:cosmetic_ui_app/controller/otp_controller.dart';
 import 'package:cosmetic_ui_app/controller/sign_in_controller.dart';
 import 'package:cosmetic_ui_app/ui/sceeen/main_screen.dart';
 import 'package:cosmetic_ui_app/ui/widget/google_sign_in_widget.dart';
@@ -13,9 +14,16 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  SignInController _signInController = Get.put(
-    SignInController(),
-  );
+  @override
+  void initState() {
+    super.initState();
+    Get.put(
+      SignInController(),
+    );
+    Get.put(
+      OTPController(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

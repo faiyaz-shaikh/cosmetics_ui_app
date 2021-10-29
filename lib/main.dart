@@ -1,19 +1,11 @@
 import 'package:cosmetic_ui_app/ui/sceeen/splash_screen.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-Future<void> backgroundHandler(RemoteMessage message) async {
-  print(message.notification!.title);
-}
-
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
-  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-
   runApp(MyApp());
 }
 

@@ -9,7 +9,7 @@ class SignInController extends GetxController {
   var facebookLogin = FacebookLogin();
   FacebookLoginResult? facebookLoginResult;
 
-  signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     googleAccount.value = await _googleSignIn.signIn();
 
     final googleAuth = await googleAccount.value!.authentication;
@@ -20,7 +20,7 @@ class SignInController extends GetxController {
     await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  signInWithFacebook() async {
+  Future<void> signInWithFacebook() async {
     facebookLoginResult = await facebookLogin.logIn(['email']);
     FacebookAccessToken facebookAccessToken = facebookLoginResult!.accessToken;
 

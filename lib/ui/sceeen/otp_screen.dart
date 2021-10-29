@@ -1,6 +1,8 @@
+import 'package:cosmetic_ui_app/controller/otp_controller.dart';
 import 'package:cosmetic_ui_app/ui/sceeen/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -11,7 +13,6 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  late String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
   final BoxDecoration pinPutDecoration = BoxDecoration(
@@ -21,11 +22,12 @@ class _OTPScreenState extends State<OTPScreen> {
       color: const Color.fromRGBO(126, 203, 224, 1),
     ),
   );
-
+  OTPController? _otpController;
   @override
   void initState() {
     super.initState();
-    verifyPhone();
+    _otpController = Get.find<OTPController>();
+    _otpController!.verifyOTP(widget.phone, context);
   }
 
   @override
@@ -62,7 +64,8 @@ class _OTPScreenState extends State<OTPScreen> {
                 try {
                   await FirebaseAuth.instance
                       .signInWithCredential(PhoneAuthProvider.credential(
-                          verificationId: _verificationCode, smsCode: pin))
+                          verificationId: _otpController!.verificationCode,
+                          smsCode: pin))
                       .then(
                     (value) async {
                       if (value.user != null) {
@@ -84,44 +87,6 @@ class _OTPScreenState extends State<OTPScreen> {
           )
         ],
       ),
-    );
-  }
-
-  verifyPhone() async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: '+91${widget.phone}',
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        await FirebaseAuth.instance.signInWithCredential(credential).then(
-          (value) async {
-            if (value.user != null) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MainPage(),
-                  ),
-                  (route) => false);
-            }
-          },
-        );
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        print('failed');
-      },
-      codeSent: (String verficationID, int? resendToken) {
-        setState(
-          () {
-            _verificationCode = verficationID;
-          },
-        );
-      },
-      codeAutoRetrievalTimeout: (String verificationID) {
-        setState(
-          () {
-            _verificationCode = verificationID;
-          },
-        );
-      },
-      timeout: Duration(seconds: 120),
     );
   }
 }
